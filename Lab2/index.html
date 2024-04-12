@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>¿Qué es Javascript y en qué se asemeja a Java?</h3>
+    <p id="explicacion"></p>
+
+    <script>
+      // PROBLEMA 1:
+      (() => {
+        document.getElementById("explicacion").innerText =
+          "JavaScript es un lenguaje de programación interpretado, diseñado para manipular el contenido de una página web de manera dinámica. Aunque su nombre sugiere una relación con Java, son lenguajes muy distintos en diseño y propósito";
+      })();
+
+      // PROBLEMA 2:
+      (() => {
+        var numero1 = 3;
+        var numero2 = 5;
+
+        // Suma
+        var suma = numero1 + numero2;
+        console.log("Suma:", suma);
+
+        // Resta
+        var resta = numero1 - numero2;
+        console.log("Resta:", resta);
+
+        // Multiplicación
+        var multiplicacion = numero1 * numero2;
+        console.log("Multiplicación:", multiplicacion);
+
+        // División
+        var division = numero1 / numero2;
+        console.log("División:", division);
+      })();
+
+      // PROBLEMA 3:
+      (() => {
+        let word1 = "May the force";
+        let word2 = "be with you";
+        console.log(`${word1} ${word2}`);
+      })();
+
+      // PROBLEMA 4:
+      (() => {
+        const num1 = "5";
+        const num2 = 5;
+        console.log(`el tipo de la constante 1 es: ${typeof num1}`);
+        console.log(`el tipo de la constante 2 es: ${typeof num2}`);
+      })();
+
+      // PROBLEMA 5:
+      (() => {
+        var miObjeto = {
+          edad: 30, // Number
+          nombre: "Alice", // String
+          esEstudiante: true, // Boolean
+          detalles: {}, // Objeto vacío
+        };
+
+        console.log(miObjeto);
+      })();
+
+      // PROBLEMA 6:
+      (() => {
+        function sumaMultiplos3y5(numero) {
+          var suma = 0; 
+          for (var i = 1; i < numero; i++) {
+            if (i % 3 === 0 || i % 5 === 0) {
+              suma += i; 
+            }
+          }
+          return suma;
+        }
+
+        var resultado = sumaMultiplos3y5(10);
+        console.log(
+          "La suma de los múltiplos de 3 o 5 menores que 10 es:",
+          resultado
+        );
+      })();
+    </script>
+  </body>
+</html>
