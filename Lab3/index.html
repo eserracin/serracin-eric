@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <header>
+        <h1>LABORATORIO # 3</H1>
+    </header>
+    <div class="container">
+      <section>
+        <h1>1. Verificador de Palíndromos de Doble Base</h1>
+        <div id="input-section">
+          <input
+            type="number"
+            id="numberInput"
+            placeholder="Ingrese un número"
+          />
+          <button
+            onclick="palindromeChecker.checkDoubleBasePalindrome(document.getElementById('numberInput').value)"
+          >
+            Verificar
+          </button>
+        </div>
+        <p id="resultText"></p>
+      </section>
+
+      <section>
+        <h1>2. Cantidad de Caracteres en una cadena</h1>
+        <div id="input-section">
+          <input
+            type="text"
+            id="cadenaInput"
+            placeholder="Ingrese una cadena"
+          />
+          <button
+            onclick="cantidadCaracteres.contarCaracteres(document.getElementById('cadenaInput').value)"
+          >
+            Verificar
+          </button>
+        </div>
+        <p id="resultText2"></p>
+      </section>
+    </div>
+
+    <div class="container">
+      <section>
+        <h1>3. Determine si el añO es bisiesto o no</h1>
+        <div id="input-section">
+          <input type="number" id="yearInput" placeholder="Ingrese el año" />
+          <button
+            onclick="anioBisiseto.esAñoBisiesto(document.getElementById('yearInput').value)"
+          >
+            Verificar
+          </button>
+        </div>
+        <p id="resultText3"></p>
+        <p />
+      </section>
+
+      <section>
+        <h1>4. Sumar numeros primos</h1>
+        <div id="input-section">
+          <input
+            type="number"
+            id="numeroEvaluar"
+            placeholder="Ingrese el numero"
+          />
+          <button
+            onclick="sumatoria.sumarPrimos(document.getElementById('numeroEvaluar').value)"
+          >
+            Verificar
+          </button>
+        </div>
+        <p id="resultText4"></p>
+      </section>
+    </div>
+
+    <div class="btn-limpiar">
+      <button type="button" onclick="limipiarInputs()">Limpiar Todo</button>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
