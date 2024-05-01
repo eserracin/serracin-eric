@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Secuencia de Fibonacci</title>
+    <style>
+        .contenedor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+            padding: 20px;
+            background-color: #ccc;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 10px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .input-numero {
+            width: 200px;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .boton {
+            padding: 5px 10px;
+            cursor: pointer;
+            width: 100px;
+            background-color: tomato;
+            color: white;
+        }
+
+        .box-resultado {
+            border: 0px #ccc;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .secuencia {
+            list-style: none;
+            padding: 0;
+        }
+
+        .box-secuencia {
+            display: inline-block;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            margin: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .box-secuencia:hover {
+            display: inline-block;
+        }
+
+        .cruz {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            color: red;
+            display: none;
+        }
+
+        .secuencia li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="form-container">
+            <h1>Secuencia de Fibonacci</h1>
+
+            <div class="input-container">
+                <input type="number" class="input-numero" id="numero">
+                <button class="boton" onclick="calcularFibonacci()">Calcular</button>
+            </div>
+
+        </div>
+
+        <div class="box-resultado" id="secuencia-resultado">
+            <div class="contenedor-secuencia"></div>
+        </div>
+    </div>
+
+    <script>
+
+        function mostrarSecuencia(secuencia) {
+            const contenedor = document.getElementById('secuencia-resultado').querySelector('.contenedor-secuencia');
+            contenedor.innerHTML = '';
+
+            for (const valor of secuencia) {
+                const box = document.createElement('div');
+                box.classList.add('box-secuencia');
+                box.textContent = valor;
+
+                const icono = document.createElement('i');
+                icono.classList.add('fa', 'fa-minus-circle', 'cruz');
+                box.appendChild(icono);
+
+                icono.addEventListener('click', () => {
+                    const box = icono.parentNode
+                    box.remove();
+                });
+
+                // Agregar evento hover al box
+                box.addEventListener('mouseover', () => {
+                    icono.style.display = 'block'; // Mostrar el icono al hacer hover
+                });
+                box.addEventListener('mouseout', () => {
+                    icono.style.display = 'none'; // Ocultar el icono al salir del hover
+                });
+
+                contenedor.appendChild(box);
+            }
+        }
+
+        function calcularFibonacci() {
+            const numero = parseInt(document.getElementById('numero').value);
+            const secuencia = generarFibonacci(numero);
+
+            mostrarSecuencia(secuencia)
+        }
+
+        function generarFibonacci(n) {
+            if (n === 0 || n === 1) {
+                return [0, 1];
+            }
+
+            const secuencia = generarFibonacci(n - 1);
+            secuencia.push(secuencia[secuencia.length - 1] + secuencia[secuencia.length - 2]);
+            return secuencia;
+        }
+    </script>
+</body>
+
+</html>
