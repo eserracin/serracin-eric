@@ -1,0 +1,56 @@
+.box-form-datos{
+    display: flex;
+    flex-direction: column;
+}
+
+.box-form-datos div{
+    width: 20rem;
+}
+
+.card {
+    width: 18rem;
+    height: 10rem;
+    display: flex;
+    flex-flow: row wrap;
+    /* align-items: center; */
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+
+.card .card-body {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.card .card-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    width: 100%;
+}
+
+.card .card-buttons button{
+    width: 2rem;
+    height: 1.7rem;
+}
+
+
+#resultado {
+    display: flex;
+    flex-wrap: wrap;    
+    gap: 1rem 5rem;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+#bandera {
+    display: inline-block;
+    width: 3rem;
+    height: 2rem;
+    border: 1px solid black;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+}

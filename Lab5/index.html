@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <section class="candidatos">
+        <h2>Candidatos</h2>
+        <div class="box-form-datos">
+            <div>
+                <label>Nombre:</label>
+                <input type="text" id="nombre" name="nombre">
+            </div>
+            <div>
+                <label>Color:</label>
+                <input type="color" id="color" name="color">
+            </div>
+            <button id="btn-agregar" style="width: 10rem;">Agregar</button>
+        </div>
+    </section>
+    <section class="votos" style="padding-top: 2rem;">
+        <div id="resultado">
+        </div>
+    </section>
+    <section class="grafica" style="padding-top: 2rem;">
+        <div id="box-grafica">
+            <canvas id="grafica" width="200" height="100" style="border:1px solid #000000;"></canvas>
+        </div>
+    </section>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
