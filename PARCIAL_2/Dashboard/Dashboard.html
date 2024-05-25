@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-title">Parcial #2</div>
+        <div class="navbar-user-info">
+            <span id="username"></span>
+            <button class="navbar-button" onclick="location.href='Profile.html'">Profile</button>
+            <button class="navbar-button" onclick="location.href='../Login/Login.html'" id="btn-signup">SignUp</button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <h1>Dashboard</h1>
+    
+        <div class="register-form">
+            <h2>Registrar Nueva Transacción</h2>
+            <form id="transaction-form">
+                <label for="type">Tipo</label>
+                <select id="type" name="type" required>
+                    <option value="inflow">Ingreso</option>
+                    <option value="outflow">Gasto</option>
+                </select>
+
+                <label for="amount">Monto</label>
+                <input type="number" id="amount" name="amount" required>
+
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <h2>Transacciones</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody id="transactions-table">
+                    <!-- Transactions will be added here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="chart-container">
+            <h2>Comparación de Ingresos y Gastos</h2>
+            <canvas id="comparison-chart"></canvas>
+        </div>
+    </div>
+    <!-- <script>
+        document.getElementById('transaction-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const type = document.getElementById('type').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            
+            if (!isNaN(amount)) {
+                addTransaction(type, amount);
+            }
+        });
+
+        let transactions = [];
+
+        function addTransaction(type, amount) {
+            transactions.push({ type, amount });
+            updateTable();
+            updateChart();
+        }
+
+        function updateTable() {
+            const tableBody = document.getElementById('transactions-table');
+            tableBody.innerHTML = '';
+            transactions.forEach(transaction => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${transaction.type === 'inflow' ? 'Ingreso' : 'Gasto'}</td>
+                    <td>${transaction.amount.toFixed(2)}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function updateChart() {
+            const inflows = transactions.filter(t => t.type === 'inflow').reduce((sum, t) => sum + t.amount, 0);
+            const outflows = transactions.filter(t => t.type === 'outflow').reduce((sum, t) => sum + t.amount, 0);
+
+            const ctx = document.getElementById('comparison-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Ingresos', 'Gastos'],
+                    datasets: [{
+                        data: [inflows, outflows],
+                        backgroundColor: ['#007BFF', '#FF6347'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                }
+            });
+        }
+    </script> -->
+    <script src="../utils.js"></script>
+    <script src="../session.js"></script>
+    <script src="Dashboard.js"></script>
+</body>
+</html>
