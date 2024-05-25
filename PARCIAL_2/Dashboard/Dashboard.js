@@ -1,4 +1,18 @@
 ((Session) => {
+
+    const TRX_KEY = 'trxData';
+
+    // Función para obtener los datos almacenados en localStorage
+    const getData = (KEY) => {
+        const data = localStorage.getItem(KEY);
+        return data ? JSON.parse(data) : [];
+      }
+  
+      //  Función para guardar los datos en localStorage
+      const setData = (data, key) => {
+        localStorage.setItem(key, JSON.stringify(data));
+      }
+
     const app = {
         htmlElements: {
             btnSignUp: document.getElementById('btn-signup'),
@@ -10,7 +24,7 @@
             chart: document.getElementById('comparison-chart')
         },
         transactions: [],
-        charInstance: null,
+        chartInstance: null,
         initialize() {
             Session.shouldBeLoggedIn('../Login/Login.html');
             app.htmlElements.btnSignUp.addEventListener('click', app.handlers.handleSignUp);
@@ -36,14 +50,18 @@
                 Session.logout('../Login/Login.html');
             },
             addTransaction(type, amount) {
-                app.transactions.push({type, amount});
+                const trxData = getData(TRX_KEY);
+                trxData.push({type, amount});
+                setData(trxData, TRX_KEY);
+                // app.transactions.push({type, amount});
                 app.render();
             },
             updateTable() {
                 const tableBody = app.htmlElements.transactionTable;
                 console.log(tableBody);
                 tableBody.innerHTML = '';
-                app.transactions.forEach(transaction => {
+                const trxData = getData(TRX_KEY);
+                trxData.forEach(transaction => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${transaction.type === 'inflow' ? 'Ingreso' : 'Gasto'}</td>
@@ -51,16 +69,25 @@
                     `;
                     tableBody.appendChild(row);
                 });
+                // app.transactions.forEach(transaction => {
+                //     const row = document.createElement('tr');
+                //     row.innerHTML = `
+                //         <td>${transaction.type === 'inflow' ? 'Ingreso' : 'Gasto'}</td>
+                //         <td>${transaction.amount.toFixed(2)}</td>
+                //     `;
+                //     tableBody.appendChild(row);
+                // });
             },
             updateChart () {
                 const inflow = app.transactions.filter(transaction => transaction.type === 'inflow').reduce((acc, transaction) => acc + transaction.amount, 0);
                 const outflow = app.transactions.filter(transaction => transaction.type === 'outflow').reduce((acc, transaction) => acc + transaction.amount, 0);
 
-                if(app.charInstance) {
-                    app.charInstance.destroy();
+                if(app.chartInstance) {
+                    app.chartInstance.data.datasets[0].data = [inflow, outflow];
+                    app.chartInstance.update();
                 }else {
-                    const ctx = document.getElementById('myChart').getContext('2d');
-                    app.charInstance = new Chart(ctx, {
+                    const ctx = app.htmlElements.chart.getContext('2d');
+                    app.chartInstance = new Chart(ctx, {
                         type: 'pie',
                         data: {
                             labels: ['Ingresos', 'Gastos'],
@@ -76,6 +103,7 @@
                         }
                     });
                 }
+            }
         },
         render: () => {
             const currentUserString = Session.getCurrentUser();
@@ -84,6 +112,7 @@
                 app.htmlElements.username.innerHTML = name;
             }
             app.methods.updateTable();
+            app.methods.updateChart();
         }
     };
     app.initialize();

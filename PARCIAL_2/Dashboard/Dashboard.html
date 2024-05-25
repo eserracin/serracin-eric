@@ -56,59 +56,6 @@
             <canvas id="comparison-chart"></canvas>
         </div>
     </div>
-    <!-- <script>
-        document.getElementById('transaction-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const type = document.getElementById('type').value;
-            const amount = parseFloat(document.getElementById('amount').value);
-            
-            if (!isNaN(amount)) {
-                addTransaction(type, amount);
-            }
-        });
-
-        let transactions = [];
-
-        function addTransaction(type, amount) {
-            transactions.push({ type, amount });
-            updateTable();
-            updateChart();
-        }
-
-        function updateTable() {
-            const tableBody = document.getElementById('transactions-table');
-            tableBody.innerHTML = '';
-            transactions.forEach(transaction => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${transaction.type === 'inflow' ? 'Ingreso' : 'Gasto'}</td>
-                    <td>${transaction.amount.toFixed(2)}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        function updateChart() {
-            const inflows = transactions.filter(t => t.type === 'inflow').reduce((sum, t) => sum + t.amount, 0);
-            const outflows = transactions.filter(t => t.type === 'outflow').reduce((sum, t) => sum + t.amount, 0);
-
-            const ctx = document.getElementById('comparison-chart').getContext('2d');
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Ingresos', 'Gastos'],
-                    datasets: [{
-                        data: [inflows, outflows],
-                        backgroundColor: ['#007BFF', '#FF6347'],
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                }
-            });
-        }
-    </script> -->
     <script src="../utils.js"></script>
     <script src="../session.js"></script>
     <script src="Dashboard.js"></script>
