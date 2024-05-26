@@ -51,36 +51,32 @@
             },
             addTransaction(type, amount) {
                 const trxData = getData(TRX_KEY);
-                trxData.push({type, amount});
+                const currentUser = Session.getCurrentUsername();
+                trxData.push({currentUser, type, amount});
                 setData(trxData, TRX_KEY);
-                // app.transactions.push({type, amount});
                 app.render();
             },
-            updateTable() {
+            updateTable(currentUsername) {
                 const tableBody = app.htmlElements.transactionTable;
                 console.log(tableBody);
                 tableBody.innerHTML = '';
                 const trxData = getData(TRX_KEY);
                 trxData.forEach(transaction => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${transaction.type === 'inflow' ? 'Ingreso' : 'Gasto'}</td>
-                        <td>${transaction.amount.toFixed(2)}</td>
-                    `;
-                    tableBody.appendChild(row);
+                    if(transaction.currentUser === currentUsername) {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${transaction.type === 'inflow' ? 'Ingreso' : 'Gasto'}</td>
+                            <td>${transaction.amount.toFixed(2)}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    }
                 });
-                // app.transactions.forEach(transaction => {
-                //     const row = document.createElement('tr');
-                //     row.innerHTML = `
-                //         <td>${transaction.type === 'inflow' ? 'Ingreso' : 'Gasto'}</td>
-                //         <td>${transaction.amount.toFixed(2)}</td>
-                //     `;
-                //     tableBody.appendChild(row);
-                // });
             },
-            updateChart () {
-                const inflow = app.transactions.filter(transaction => transaction.type === 'inflow').reduce((acc, transaction) => acc + transaction.amount, 0);
-                const outflow = app.transactions.filter(transaction => transaction.type === 'outflow').reduce((acc, transaction) => acc + transaction.amount, 0);
+            updateChart(currentUsername) {
+                const trxData = getData(TRX_KEY);
+                
+                const inflow = trxData.filter(t => t.currentUser === currentUsername && t.type === 'inflow').reduce((acc, t) => acc + t.amount, 0);
+                const outflow = trxData.filter(t => t.currentUser === currentUsername && t.type === 'outflow').reduce((acc, t) => acc + t.amount, 0);
 
                 if(app.chartInstance) {
                     app.chartInstance.data.datasets[0].data = [inflow, outflow];
@@ -106,13 +102,11 @@
             }
         },
         render: () => {
-            const currentUserString = Session.getCurrentUser();
-            if(Array.isArray(currentUserString) && currentUserString.length > 0) { 
-                const name = currentUserString[0].name;
-                app.htmlElements.username.innerHTML = name;
-            }
-            app.methods.updateTable();
-            app.methods.updateChart();
+            const currentUserString = Session.getCurrentNameOfUser();
+            const currentUsername = Session.getCurrentUsername();
+            app.htmlElements.username.innerHTML = currentUserString;
+            app.methods.updateTable(currentUsername);
+            app.methods.updateChart(currentUsername);
         }
     };
     app.initialize();

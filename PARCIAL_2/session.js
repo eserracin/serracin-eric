@@ -71,8 +71,22 @@
         if (!localStorage.getItem("username"))
           window.location.href = page;
       },
-      getCurrentUser() {
-        return getData(CURRENT_USER);
+      getCurrentNameOfUser() {
+        data = getData(CURRENT_USER);
+        let name = null;
+        if(Array.isArray(data) && data.length > 0) { 
+          name = data[0].name;
+          console.log(`Nombre:  ${name}`);
+        }
+        return name
+      },
+      getCurrentUsername() {
+        data = getData(CURRENT_USER);
+        let username = null;
+        if(Array.isArray(data) && data.length > 0) { 
+          username = data[0].username;
+        }
+        return username
       }
     };
     window.Session = Session;
