@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-title">Parcial #2</div>
+        <div class="navbar-user-info">
+            <span id="username"></span>
+            <button class="navbar-button" onclick="location.href='Profile.html'">Profile</button>
+            <button class="navbar-button" onclick="location.href='../Login/Login.html'" id="btn-signup">SignUp</button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <h1>Dashboard</h1>
+    
+        <div class="register-form">
+            <h2>Registrar Nueva Transacción</h2>
+            <form id="transaction-form">
+                <label for="type">Tipo</label>
+                <select id="type" name="type" required>
+                    <option value="inflow">Ingreso</option>
+                    <option value="outflow">Gasto</option>
+                </select>
+
+                <label for="amount">Monto</label>
+                <input type="number" id="amount" name="amount" required>
+
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <h2>Transacciones</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody id="transactions-table">
+                    <!-- Transactions will be added here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="chart-container">
+            <h2>Comparación de Ingresos y Gastos</h2>
+            <canvas id="comparison-chart"></canvas>
+        </div>
+    </div>
+    <script src="../utils.js"></script>
+    <script src="../session.js"></script>
+    <script src="Dashboard.js"></script>
+</body>
+</html>

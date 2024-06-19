@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="POST" id="frm-login">
+            <label for="username">Usuario</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" id="btn-login">Ingresar</button>
+        </form>
+        <button class="register-button" onclick="location.href='../SignIn/SignIn.html'">Registrarse</button>
+    </div>
+    <script src="../utils.js"></script>
+    <script src="../session.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>
